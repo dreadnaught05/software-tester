@@ -16,7 +16,7 @@ public class PositionTest {
         assertFalse(position.isEligibleForSickLeave(), "eligible for sick leave should be defaulted to false");
         assertFalse(position.isEligibleForPersonalLeave(), "eligible for personal leave should be defaulted to false");
         assertFalse(position.isEligibleForVacationLeave(), "eligible for vacation leave should be defaulted to false");
-        assertSame(position.getJobStatus(), JobStatus.Active, "job status should default to Active");
+        assertEquals(position.getJobStatus(), JobStatus.Active, "job status should default to Active");
         assertEquals(0, (int) position.getNumber(), "number should default to zero");
     }
 
@@ -27,13 +27,12 @@ public class PositionTest {
 
         assertEquals(position.getEmployee(), employee);
         assertEquals(1, (int) position.getNumber());
+        assertEquals(position.getJobStatus(), JobStatus.Active);
 
         assertTrue(position.isEligibleForSickLeave());
         assertTrue(position.isEligibleForVacationLeave());
 
         assertFalse(position.isEligibleForPersonalLeave());
-
-        assertSame(position.getJobStatus(), JobStatus.Active);
     }
 
     @Test
