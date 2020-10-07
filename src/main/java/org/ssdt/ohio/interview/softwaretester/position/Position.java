@@ -30,7 +30,7 @@ public class Position extends AbstractModelObject {
 
     /**
      * Validates if this Position is eligible for the passed Attendance Item Category.
-     * An archived Employee and job status of either Terminated or Deceased will always be eligible for leave.
+     * An archived Employee and job status of either Terminated or Deceased will always be ineligible for leave.
      *
      * @param category The Attendance Item Category of leave used.
      * @return true if the position is eligible, false if ineligible.
