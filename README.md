@@ -1,4 +1,4 @@
-# Software Tester Interview Project
+# Software Tester Interview
 
 This State Software Development Team of Ohio project is used in the interview process for potential candidates of the open Software Tester positions.
 
