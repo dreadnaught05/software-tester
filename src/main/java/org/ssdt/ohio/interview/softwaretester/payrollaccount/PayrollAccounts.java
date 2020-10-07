@@ -8,8 +8,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.ssdt.ohio.interview.softwaretester.constants.AccountStatus.Active;
-
 public class PayrollAccounts extends AbstractModelObject {
 
     private Set<Account> accounts;
@@ -26,7 +24,7 @@ public class PayrollAccounts extends AbstractModelObject {
      */
     public Set<Account> findActivePayrollAccounts() {
         return getAccounts().stream()
-                .filter( it -> (it.getStatus() == Active || !it.getChargeAmountOrPercent().equals(BigDecimal.ZERO)))
+                .filter( it -> (it.isActive() || !it.getChargeAmountOrPercent().equals(BigDecimal.ZERO)))
                 .collect(Collectors.toSet());
     }
 

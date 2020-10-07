@@ -1,38 +1,39 @@
 package org.ssdt.ohio.interview.softwaretester.model;
 
 import org.junit.jupiter.api.Test;
-import org.ssdt.ohio.interview.softwaretester.constants.JobStatus;
-import org.ssdt.ohio.interview.softwaretester.employee.Employee;
-import org.ssdt.ohio.interview.softwaretester.position.Position;
+import org.ssdt.ohio.interview.softwaretester.constants.RateType;
+import org.ssdt.ohio.interview.softwaretester.payrollaccount.Account;
+import org.ssdt.ohio.interview.softwaretester.payrollaccount.PayrollAccounts;
+
+import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PayrollAccountsTest {
 
     @Test
-    void testPositionFactoryWithNoArgs() {
-        Position position = Position.create();
+    void testPayrollAccountsFactoryWithNoArgs() {
+        PayrollAccounts payrollAccounts = PayrollAccounts.create();
+        Account account = Account.create();
+        payrollAccounts.add(account);
 
-        assertFalse(position.isEligibleForSickLeave(), "eligible for sick leave should be defaulted to false");
-        assertFalse(position.isEligibleForPersonalLeave(), "eligible for personal leave should be defaulted to false");
-        assertFalse(position.isEligibleForVacationLeave(), "eligible for vacation leave should be defaulted to false");
-        assertEquals(position.getJobStatus(), JobStatus.Active, "job status should default to Active");
-        assertEquals(0, (int) position.getNumber(), "number should default to zero");
+        assertTrue(account.isActive());
+        assertEquals(account.getPayrollAccounts(), payrollAccounts);
+        assertEquals(account.getChargeAmountOrPercent(), BigDecimal.ZERO);
+        assertEquals(account.getRateType(), RateType.Percent);
     }
 
     @Test
-    void testPositionFactoryWithArgs() {
-        Employee employee = Employee.create("ANON101", "Test", "Emp");
-        Position position = Position.create(employee, 1, JobStatus.Active, true, false, true);
+    void testPayrollAccountsFactoryWithArgs() {
+        PayrollAccounts payrollAccounts = PayrollAccounts.create();
+        Account account = Account.create(true, RateType.Fixed, new BigDecimal("100.00"), "412001");
+        payrollAccounts.add(account);
 
-        assertEquals(position.getEmployee(), employee);
-        assertEquals(1, (int) position.getNumber());
-        assertEquals(position.getJobStatus(), JobStatus.Active);
-
-        assertTrue(position.isEligibleForSickLeave());
-        assertTrue(position.isEligibleForVacationLeave());
-
-        assertFalse(position.isEligibleForPersonalLeave());
+        assertTrue(account.isActive());
+        assertEquals(account.getPayrollAccounts(), payrollAccounts);
+        assertEquals(account.getChargeAmountOrPercent(), new BigDecimal("100.00"));
+        assertEquals(account.getRateType(), RateType.Fixed);
+        assertEquals(account.getAccountNumber(), "412001");
     }
 
     //TODO: Write unit test to verify findActiveAccounts filters different account sets correctly

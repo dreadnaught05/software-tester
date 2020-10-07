@@ -1,7 +1,6 @@
 package org.ssdt.ohio.interview.softwaretester.payrollaccount;
 
 import org.ssdt.ohio.interview.softwaretester.AbstractModelObject;
-import org.ssdt.ohio.interview.softwaretester.constants.AccountStatus;
 import org.ssdt.ohio.interview.softwaretester.constants.RateType;
 
 import java.math.BigDecimal;
@@ -10,7 +9,7 @@ public class Account extends AbstractModelObject {
 
     private PayrollAccounts payrollAccounts;
 
-    private AccountStatus status;
+    private boolean active;
 
     private RateType rateType;
 
@@ -20,7 +19,7 @@ public class Account extends AbstractModelObject {
 
     public Account() {
         super();
-        this.status = AccountStatus.Active;
+        this.active = true;
         this.rateType = RateType.Percent;
         this.chargeAmountOrPercent = BigDecimal.ZERO;
     }
@@ -30,13 +29,22 @@ public class Account extends AbstractModelObject {
         return new Account();
     }
 
-    //Getters and Setters
-    public AccountStatus getStatus() {
-        return this.status;
+    public static Account create(boolean active, RateType rateType, BigDecimal chargeAmountOrPercent, String accountNumber) {
+        Account account = new Account();
+        account.setActive(active);
+        account.setRateType(rateType);
+        account.setChargeAmountOrPercent(chargeAmountOrPercent);
+        account.setAccountNumber(accountNumber);
+        return account;
     }
 
-    public void setStatus(AccountStatus status) {
-        this.status = status;
+    //Getters and Setters
+    public boolean isActive() {
+        return this.active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public BigDecimal getChargeAmountOrPercent() {
