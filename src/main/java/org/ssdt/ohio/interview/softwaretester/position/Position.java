@@ -35,7 +35,7 @@ public class Position extends AbstractModelObject {
      * @param category The Attendance Item Category of leave used.
      * @return true if the position is eligible, false if ineligible.
      */
-    boolean isEligibleForLeave(AttendanceItemCategory category) {
+    public boolean isEligibleForLeave(AttendanceItemCategory category) {
         if (getEmployee().isArchived() || getJobStatus() == JobStatus.Terminated || getJobStatus() == JobStatus.Deceased) {
             return false;
         }
