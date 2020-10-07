@@ -22,6 +22,10 @@ public class Employee extends AbstractModelObject {
         return this;
     }
 
+    public static Employee create() {
+        return new Employee();
+    }
+
     public static Employee create(String number, String firstName, String lastName) {
         Employee employee = new Employee();
         employee.setNumber(number);
